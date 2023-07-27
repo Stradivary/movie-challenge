@@ -4,7 +4,12 @@ import { styles } from "./movieSection.styles.js";
 import { IMAGE_PATH } from "../../configs/index.js";
 import { Icon } from "react-native-magnus";
 
-export default movieSectionItem = ({ data, horizontalItemsView, handleSelectItem }) => {
+export default movieSectionItem = ({ data, horizontalItemsView, 
+  handleSelectItem,
+  rightPlayButton=false,
+  hideRateStar=false,
+  customDesc=()=>{},
+}) => {
   const source = useRef({
     uri: `${IMAGE_PATH}${data?.poster_path || ""}`,
   }).current;
@@ -22,7 +27,7 @@ export default movieSectionItem = ({ data, horizontalItemsView, handleSelectItem
             {data?.title || ""}
           </Text>
         </TouchableOpacity>
-        <View style={styles.titleDescBottom}>
+        {!hideRateStar &&<View style={styles.titleDescBottom}>
           <View style={styles.titleDesc}>
             <Text style={{ color: "yellow", fontSize: 3, paddingTop:0 }}>
               <Icon name="star" fontFamily="FontAwesome" fontSize={10} color="yellow" />
@@ -35,7 +40,16 @@ export default movieSectionItem = ({ data, horizontalItemsView, handleSelectItem
             style={styles.titleAttribut}>
             1h 45min | Fantasy
           </Text>
-        </View>
+        </View>}
+        {hideRateStar && <View style={styles.titleDescBottom}>
+        {customDesc(data, styles) || 
+          <View style={styles.titleDesc}>
+           <Text style={{marginLeft:5, color:'white', fontSize:8}}>
+            {data?.vote_average || ""}
+            </Text>
+          </View>
+        }
+        </View>}
       </View>
     </View>
   );

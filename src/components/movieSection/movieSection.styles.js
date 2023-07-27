@@ -31,6 +31,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#333333",
     borderRadius: 5,
     paddingVertical: 4,
+    paddingHorizontal:6
   },
   titleAttribut:{
     color: "#ababab",

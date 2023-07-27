@@ -3,8 +3,8 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   root:{
     position:'relative',
-    top:-12,
-    left:-2,
+    top:0,
+    left:0,
     right:0,
     height:60,
     display:'flex',

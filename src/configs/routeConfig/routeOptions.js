@@ -16,7 +16,6 @@ export const RouteOptions = {
     unmountOnBlur: true,
   },
   detailMovie: (props)=>{
-    console.log(props)
     return{
       headerShown: true,
       title: "Details",
