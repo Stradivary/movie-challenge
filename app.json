@@ -29,12 +29,6 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "69d13519-8dfd-4def-961e-893ecea2e0b8"
-      }
-    },
-    "owner": "wawanexpo88"
+    }
   }
 }
