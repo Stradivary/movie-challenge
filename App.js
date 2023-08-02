@@ -19,7 +19,7 @@ export default function App() {
 
   const HomeTabsMenu= () => {
     return (
-      <Tab.Navigator  tabBar={(props)=><TabBarBottom {...props} />}>
+      <Tab.Navigator initialRouteName='Home' tabBar={(props)=><TabBarBottom {...props} />}>
         <Tab.Screen options={RouteOptions.home} name="Home" component={Home} />
         <Tab.Screen options={RouteOptions.searchMoview} name="SearchMovie" component={SearchMovie} />
         <Tab.Screen options={RouteOptions.favorites} name="Favorites" component={Favorites} />
@@ -31,7 +31,7 @@ export default function App() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <GlobalContextProvider>
         <ThemeProvider theme={theme}>
-        <NavigationContainer >
+        <NavigationContainer>
           <Stack.Navigator>
             {/* <Stack.Screen
               name="OnBoarding"
@@ -39,16 +39,15 @@ export default function App() {
               component={OnBoarding}
             /> */}
             <Stack.Screen
-              name="DetailMovie"
-              options={(props)=>RouteOptions.detailMovie(props)}
-              component={DetailMovie}
-            />
-            <Stack.Screen
               name="HomeMenu"
               options={RouteOptions.homeMenu}
               component={HomeTabsMenu}
             />
-          
+            <Stack.Screen
+              name="DetailMovie"
+              options={(props)=>RouteOptions.detailMovie(props)}
+              component={DetailMovie}
+            />
           </Stack.Navigator>
         </NavigationContainer>
         </ThemeProvider>

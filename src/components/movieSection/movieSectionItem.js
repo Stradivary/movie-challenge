@@ -3,18 +3,19 @@ import { View, Image, Text, ActivityIndicator, TouchableOpacity } from "react-na
 import { styles } from "./movieSection.styles.js";
 import { IMAGE_PATH } from "../../configs/index.js";
 import { Icon } from "react-native-magnus";
+import { formatDuraton } from "../../helpers/index.js";
 
 export default movieSectionItem = ({ data, horizontalItemsView, 
   handleSelectItem,
-  rightPlayButton=false,
   hideRateStar=false,
   customDesc=()=>{},
 }) => {
   const source = useRef({
     uri: `${IMAGE_PATH}${data?.poster_path || ""}`,
   }).current;
+
   return (
-    <View style={horizontalItemsView ? styles.itemContainerHorizontal : styles.itemContainer}>
+    <View key={data?.id} style={horizontalItemsView ? styles.itemContainerHorizontal : styles.itemContainer}>
         <TouchableOpacity onPress={()=>handleSelectItem(data)}>
           <View style={horizontalItemsView ? styles.cImageItemHorizontal :  styles.cImageItem}>
             <ActivityIndicator size="small" />
@@ -38,7 +39,7 @@ export default movieSectionItem = ({ data, horizontalItemsView,
           </View>
           <Text
             style={styles.titleAttribut}>
-            1h 45min | Fantasy
+            {formatDuraton(data?.runtime)} | Fantasy
           </Text>
         </View>}
         {hideRateStar && <View style={styles.titleDescBottom}>

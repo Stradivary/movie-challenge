@@ -4,12 +4,15 @@ import { styles } from "./searchMovies.styles";
 import { Icon, Input } from "react-native-magnus";
 import MovieSection from "../../components/movieSection/index";
 
-export default function searchMovies({ data }) {
+export default function searchMovies({ data, setKeyword, navigation }) {
   return (
     <View style={styles.root}>
       <Input 
         placeholder="Cari"
         style={styles.inputSearch}
+        onChangeText={(value)=>{
+          setKeyword(value);
+        }}
         p={5}
         m={15}
         mt={21}
@@ -25,6 +28,7 @@ export default function searchMovies({ data }) {
         </Text>}
       />
       <MovieSection
+        handleSelectItem={(item) => navigation.navigate("DetailMovie", item)}
         title={"Popular Movie"}
         horizontal={false}
         scrollEnabled={false}

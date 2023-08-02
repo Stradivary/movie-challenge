@@ -22,7 +22,7 @@ export default function MovieSection({
   hide
 }) {
   return (
-    <View style={styles.root}>
+    <View style={styles.root} key={'movsection'+title}>
       {withTitle ? <View style={styles.titleHeader}>
         <Text style={styles.title}>{title}</Text>
         <TouchableOpacity onPress={()=>handleSeeAll()}>
@@ -40,6 +40,7 @@ export default function MovieSection({
         spacing={10}
         {...gridProps}
         renderItem={({ item }) =><MovieSectionItem 
+
           rightPlayButton={rightPlayButton}
           hideRateStar={hideRateStar}
           handleSelectItem={handleSelectItem} 

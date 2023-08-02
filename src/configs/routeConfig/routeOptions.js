@@ -23,6 +23,7 @@ export const RouteOptions = {
       unmountOnBlur: true,
       headerTransparent: true,
       headerTitle:()=><HeaderOption {...props} />,
+      headerLeft:null,
       headerStyle: {
         backgroundColor: 'transparent',
         height: 70,

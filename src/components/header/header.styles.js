@@ -16,6 +16,6 @@ export const styles = StyleSheet.create({
     width:'100%',
     resizeMode:'stretch',
     backgroundColor:'transparent',
-    paddingTop:20
+    paddingTop:20,
   },
 });

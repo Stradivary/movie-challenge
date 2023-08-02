@@ -1,34 +1,85 @@
-import { useState, useEffect } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { ScrollView } from 'react-native';
-import {styles} from './home.styles.js';
-import MovieSection from '../../components/movieSection/index.js';
-import CarouselMovie from '../../components/carouselMovie/index.js';
-import { getDiscover, SortByOptions } from '../../repositories/movies';
-// import DiscoverCarousel from '../../components/discover/discover-carousel';
+import { useState, useEffect } from "react";
+import { StatusBar } from "expo-status-bar";
+import { ScrollView } from "react-native";
+import { styles } from "./home.styles.js";
+import MovieSection from "../../components/movieSection/index.js";
+import CarouselMovie from "../../components/carouselMovie/index.js";
+import {
+  getTopRate,
+  getUpcoming,
+  getPopular,
+  getNowPlaying,
+  getTrending,
+} from "../../repositories/movies";
 
-export default function App({navigation}) {
-  const [movies, setMovies] = useState([]);
+export default function App({ navigation }) {
+  const [trending, setTrending] = useState([]);
+  const [topRateMovie, setTopRateMoview] = useState([]);
+  const [upComing, setUpComming] = useState([]);
+  const [latest, setLatest] = useState([]);
+  const [nowPlaying, setGetNowPlaying] = useState([]);
 
   useEffect(() => {
-    getDiscover(SortByOptions.voteDesc).then((res) => {
-      setMovies(res);
+    getTrending().then((res) => {
+      setTrending(res);
+    });
+  }, []);
+  
+  useEffect(() => {
+    getPopular().then((res) => {
+      setLatest(res);
+    });
+  }, []);
+
+  useEffect(() => {
+    getNowPlaying().then((res) => {
+      setGetNowPlaying(res);
+    });
+  }, []);
+
+  useEffect(() => {
+    getTopRate().then((res) => {
+      setTopRateMoview(res);
+    });
+  }, []);
+
+  useEffect(() => {
+    getUpcoming().then((res) => {
+      setUpComming(res);
     });
   }, []);
 
   return (
     <ScrollView style={styles.root}>
-      {/* <DiscoverCarousel/> */}
-      <CarouselMovie movies={movies?.slice(0,5)} />
-      <MovieSection 
-        handleSeeAll={()=>navigation.navigate('movieList')}
-        handleSelectItem={(item)=>navigation.navigate("DetailMovie", item)}
-        movies={movies?.slice(6,11)} title={"Latest Movies"} 
+      <CarouselMovie
+        movies={trending.slice(0,5)}
+        handleSelectItem={(item) => navigation.navigate("DetailMovie", item)}
       />
-      <MovieSection movies={movies?.slice(12,17)} title={"Now Playing"} />
-      <MovieSection movies={movies?.slice(18,23)} title={"Top rated"} />
-      <MovieSection movies={movies?.slice(12,17)}title={"Upcoming"} />
-      <StatusBar movies={movies?.slice(17,27)} style="auto" />
+      <MovieSection
+        handleSeeAll={() => navigation.navigate("movieList")}
+        handleSelectItem={(item) => navigation.navigate("DetailMovie", item)}
+        movies={latest}
+        title={"Latest Movies"}
+      />
+      <MovieSection
+        handleSeeAll={() => navigation.navigate("movieList")}
+        handleSelectItem={(item) => navigation.navigate("DetailMovie", item)}
+        movies={nowPlaying}
+        title={"Now Playing"}
+      />
+      <MovieSection
+        handleSeeAll={() => navigation.navigate("movieList")}
+        handleSelectItem={(item) => navigation.navigate("DetailMovie", item)}
+        movies={topRateMovie}
+        title={"Top rated"}
+      />
+      <MovieSection
+        handleSeeAll={() => navigation.navigate("movieList")}
+        handleSelectItem={(item) => navigation.navigate("DetailMovie", item)}
+        movies={upComing}
+        title={"Upcoming"}
+      />
+      <StatusBar style="auto" />
     </ScrollView>
   );
 }

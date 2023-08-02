@@ -1,25 +1,48 @@
-import React, { useState } from "react";
-import { View } from "react-native";
+import React from "react";
+import { View, Image } from "react-native";
 import { styles } from "./moviePlayer.styles.js";
-import { Button, Div } from "react-native-magnus";
+import { Div } from "react-native-magnus";
 import { ResizeMode } from "expo-av";
 import VideoPlayer from "expo-video-player";
+import { IMAGE_PATH } from "../../configs/index.js";
 
 export default function moviePlayer({
-  data = [],
+  videoUrl = "",
+  imageUrl = "",
   title,
   tabSelected,
-  ...tabProps
+  ...videoProps
 }) {
+  const renderEmpty = () => {
+    return (
+      <Div bg="#a1a1a1" h={300} w={"100%"} position="relative">
+        <View style={styles.cImageItem}>
+          <Image
+            style={styles.cImage}
+            source={{
+              uri: `${IMAGE_PATH}${imageUrl || ""}`,
+            }}
+          />
+        </View>
+      </Div>
+    );
+  };
+
+  if (!videoUrl) {
+    return renderEmpty();
+  }
+
   return (
     <VideoPlayer
       style={styles.root}
       videoProps={{
-        shouldPlay: true,
+        shouldPlay: false,
         resizeMode: ResizeMode.CONTAIN,
+        useNativeControls: true,
         source: {
-          uri: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+          uri: videoUrl,
         },
+        ...videoProps,
       }}
     />
   );

@@ -17,7 +17,6 @@ export default function cardSlider({
   handleSeeAll=()=>{},
   handleSelectItem=()=>{},
 }) {
-  console.log("DATA", data);
   return (
     <View style={styles.root}>
       {withTitle ? <View style={styles.titleHeader}>
